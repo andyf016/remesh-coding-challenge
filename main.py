@@ -8,22 +8,34 @@ from pprint import pprint
 import operator
 import json
 import time
+import argparse
 
 PATH = "/Users/andrewfillenwarth/Desktop/Projects/selenium/chromedriver"
 driver = webdriver.Chrome(PATH)
 driver.implicitly_wait(10)
 driver.get("https://www.rottentomatoes.com/")
-search_string = "godfather"
+search_string = ""
 list_of_results = []
 
+parser = argparse.ArgumentParser(description='Create Configuration')
+parser.add_argument('search_string', type=str, help='search string')
+args = parser.parse_args()
+search_string = args.search_string
+
+print(search_string)
 
 
 
 search = WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.CLASS_NAME, "search-text")))
 
 search.send_keys(search_string)
-view_all = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.LINK_TEXT, "View All")))
-view_all.click()
+try:
+    view_all = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.LINK_TEXT, "View All")))
+    view_all.click()
+except:
+    
+    print("no results to show")
+    driver.quit()
 show_movies = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.XPATH, '//*[@id="main-page-content"]/div/section[1]/search-result-container/nav/ul/li[3]/span')))
 show_movies.click()
 
@@ -44,7 +56,7 @@ while True:
         props['tomatometerscore'] = int(tom_score.get('score', 0))
         #print(props['tomatometerscore'])
         props['releaseyear'] = int(props.get('releaseyear', 0))
-        if operator.contains(props['name'].lower(), search_string.lower()):
+        if operator.contains(props['name'].lower(), search_string.lower()) and (props['audiencescore'] * props['tomatometerscore']) != 0:
             list_of_results.append(props)
         next_button = shadow_root_2.find_element_by_css_selector('button.btn.paging-btn.paging-btn-right')
     try:
@@ -52,7 +64,9 @@ while True:
         time.sleep(5)
     except:
         break
-print(len(list_of_results))
+
+
+        
 
 sorted_list = sorted(list_of_results, key=operator.itemgetter('tomatometerscore', 'audiencescore', 'releaseyear'), reverse = True)
 print(sorted_list[0])
