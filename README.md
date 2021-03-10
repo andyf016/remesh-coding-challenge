@@ -17,3 +17,6 @@ This application includes a command line argument parser, run it from the comman
 python main.py godfather
 ```
 The search string is a required argument.
+
+## Bug!
+There is a recurring stale element refrence exception occuring while navigating the pages of results. After several failed attempts to fix the root cause of the issue I included a time.sleep() function the mitigate the issue but this cures the symptom and not the disease. Any feedback regarding this issue and how to fix it would be greatly appreciated. 

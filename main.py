@@ -106,9 +106,9 @@ sorted_list = sorted(list_of_results, key=operator.itemgetter('tomatometerscore'
 final_movie = sorted_list[0]
 print(f'The best match for movie search string {search_string} is: ')
 print('Title: ' + final_movie['name'])
-print('Release Year: ' + final_movie['releaseyear'])
-print('Critic Score: ' + final_movie['tomatometerscore'])
-print('Audience Score ' + final_movie['audiencescore'])
+print('Release Year: ' + str(final_movie['releaseyear']))
+print('Critic Score: ' + str(final_movie['tomatometerscore']))
+print('Audience Score ' + str(final_movie['audiencescore']))
 print('URL: ' + final_movie["url"])
 
 
