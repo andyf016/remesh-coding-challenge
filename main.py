@@ -102,6 +102,7 @@ while True:
 # sort the list by the criteria required
 sorted_list = sorted(list_of_results, key=operator.itemgetter('tomatometerscore', 'audiencescore', 'releaseyear'), reverse = True)
 
+# get the top movie from the list and print it's properties
 final_movie = sorted_list[0]
 print(f'The best match for movie search string {search_string} is: ')
 print('Title: ' + final_movie['name'])
@@ -112,15 +113,4 @@ print('URL: ' + final_movie["url"])
 
 
 
-
-
-
-
-
-
 driver.quit()
-
-
-# <button class="btn paging-btn paging-btn-right" data-qa="paging-btn-next">
-#                Next
-#            </button>
