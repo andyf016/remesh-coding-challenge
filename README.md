@@ -24,5 +24,3 @@ python main.py godfather
 ```
 The search string is a required argument.
 
-## Bug!
-There is a recurring stale element refrence exception occuring while navigating the pages of results. After several failed attempts to fix the root cause of the issue I included a time.sleep() function. This helps mitigates the issue but it is not a complete fix. Any feedback regarding this issue and how to fix it would be greatly appreciated. 
